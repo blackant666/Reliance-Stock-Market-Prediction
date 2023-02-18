@@ -7,7 +7,7 @@
 
 <h2>Description of the project:</h2>
 
-<a>STILL WORKING ON PROJECT<a>
+<h1>STILL WORKING ON PROJECT</h1>
 
 # Data
 
