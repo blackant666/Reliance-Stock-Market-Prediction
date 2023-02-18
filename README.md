@@ -12,34 +12,15 @@
 - If want to download the data for the different companies you cant download form this website. From here you can Get both <b>BSE</b> and <b>NSE</b> data.
 
 
-# If you are that guy who loves cmd.💪🏻
-### 🛠️ Jupyter Notebook Installation Steps by using cmd:
-
-1. Open cmd in Admin mode.
-2. Then copy the following command. And paste it into cmd.
-
-```bash
-pip install notebook
-```
-3. To open Jupyter notebook. Then copy the following command. And paste it into cmd.
+# Libraries that i used in the project. 
+1. Pandas
+2. Matplotlib
+### You can install this libraries by using the command.
 
 ```bash
-jupyter notebook
+pip install {library name}
 ```
-### 🛠️ Jupyter Lab Installation Steps by using cmd:
-#### Jupyter Lab is similar to Jupyter Notebook. But it has more features than then Jupyter Notebook.
-
-1. Open cmd in Admin mode.
-2. Then copy the following command. And paste it into cmd.
-
-```bash
-pip install jupyterlab
-```
-3. To open jupyter notebook. Then copy the following command. And paste it into cmd.
-
-```bash
-jupyter-lab
-```
+### Description of the project:
 
 ---
 <p align="center">
