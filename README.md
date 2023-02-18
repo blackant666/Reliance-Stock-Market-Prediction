@@ -9,7 +9,7 @@
 
 - 📈 [Data](https://www.business-standard.com/company/reliance-industr-476/price-history/1)
 
-- If want to download the data for the different companies you cant download form this website. From here you can Get both <b>BSE</b> and <b>NSE</b> data.
+- If you want to download data for different companies then you can download from this website. From here you can get both <b>BSE</b> and <b>NSE</b> data.
 
 
 # Libraries that i used in the project. 
