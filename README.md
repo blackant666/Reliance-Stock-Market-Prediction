@@ -8,7 +8,7 @@
 # Data
 ### If you want to download the data.
 
-- 📈 [Download](https://www.business-standard.com/company/reliance-industr-476/price-history/1)
+- 📈 [Data](https://www.business-standard.com/company/reliance-industr-476/price-history/1)
 
 - You need to download Anaconda to install Jupyter notebook in your system. After the download is completed. You have to install it just like normal software. Anaconda is a combination of multiple IDEs. You'll find Jupyter Notebook there. Just open that and start your coding.
 
