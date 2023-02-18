@@ -5,10 +5,10 @@
 <h3>Hey Folks,👨🏻‍💻</h3>
 <p>I have created a stock market price prediction program that can predict the stock price of any company for the next 30 days. Here I used the last 7 years' data of Reliance Industries Limited. I did this project during my internship</p>
 
-# Download Jupyter Notebook
-### If you are that guy who likes Graphical installation here is the link to download the Jupyter Notebook
+# Data
+### If you want to download the data.
 
-- 💿 [Download](https://www.anaconda.com/)
+- 📈 [Download](https://www.business-standard.com/company/reliance-industr-476/price-history/1)
 
 - You need to download Anaconda to install Jupyter notebook in your system. After the download is completed. You have to install it just like normal software. Anaconda is a combination of multiple IDEs. You'll find Jupyter Notebook there. Just open that and start your coding.
 
