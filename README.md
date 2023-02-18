@@ -6,7 +6,6 @@
 <p>I have created a stock market price prediction program that can predict the stock price of any company for the next 30 days. Here I used the last 7 years' data of Reliance Industries Limited. I did this project during my internship</p>
 
 # Data
-### If you want to download the data.
 
 - 📈 [Data](https://www.business-standard.com/company/reliance-industr-476/price-history/1)
 
