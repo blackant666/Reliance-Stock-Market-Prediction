@@ -9,7 +9,7 @@
 
 - 📈 [Data](https://www.business-standard.com/company/reliance-industr-476/price-history/1)
 
-- You need to download Anaconda to install Jupyter notebook in your system. After the download is completed. You have to install it just like normal software. Anaconda is a combination of multiple IDEs. You'll find Jupyter Notebook there. Just open that and start your coding.
+- If want to download the data for the different companies you cant download form this website. From here you can Get both <b>BSE</b> and <b>NSE</b> data.
 
 
 # If you are that guy who loves cmd.💪🏻
