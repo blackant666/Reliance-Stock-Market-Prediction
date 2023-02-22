@@ -26,7 +26,19 @@
 
 - I collected this data from Jan-2015 to Jan-2023.
 
-- If you want to download data for different companies then you can download from this website.
+- Date: Date of trade
+
+- Open: Opening Price of Stock
+
+- High: Highest price of stock on that day
+
+- Low: Lowest price of stock on that day
+
+- Close: Close price adjusted for splits.
+
+- Adj Close: Adjusted close price adjusted for splits and dividend and/or capital gain distributions.
+
+- Volume: Volume of stock on that day
 
 
 # Libraries that i used in the project. 
