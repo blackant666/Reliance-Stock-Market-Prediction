@@ -6,12 +6,23 @@
 <p>I have created a stock market price prediction program that can predict the stock price of any company for the next 30 days. Here I used the last 7 years' data of Reliance Industries Limited. I did this project during my internship</p>
 
 <h2>Description of the project:</h2>
+<h4>Business Objective of the project</h4>
+- Predict the Reliance Industries Stock Price for the next 30 days.
 
-<h1>STILL WORKING ON PROJECT</h1>
+- There are Open, High, Low and Close prices that you need to obtain from the web for each day starting from 2015 to 2022 for Reliance Industries stock.
 
-# Data
+- Split the last year into a test set- to build a model to predict stock price.
+
+- Find short term, & long term trends.
+
+- Understand how it is impacted from external factors or any big external events.
+
+- Forecast for next 30 days.
+
+# About Data
 
 - 📈 [Data](https://finance.yahoo.com/quote/RELIANCE.NS/history?period1=1420070400&period2=1672444800&interval=1d&filter=history&frequency=1d&includeAdjustedClose=true)
+- I collected this data from Jan-2015 to Jan-2023.
 
 - If you want to download data for different companies then you can download from this website.
 
