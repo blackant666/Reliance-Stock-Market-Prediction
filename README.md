@@ -11,9 +11,9 @@
 
 # Data
 
-- 📈 [Data](https://www.business-standard.com/company/reliance-industr-476/price-history/1)
+- 📈 [Data](https://finance.yahoo.com/quote/RELIANCE.NS/history?period1=1420070400&period2=1672444800&interval=1d&filter=history&frequency=1d&includeAdjustedClose=true)
 
-- If you want to download data for different companies then you can download from this website. From here you can get both <b>BSE</b> and <b>NSE</b> data.
+- If you want to download data for different companies then you can download from this website.
 
 
 # Libraries that i used in the project. 
