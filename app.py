@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
+
 from sklearn.metrics import mean_squared_error, mean_absolute_error, explained_variance_score, r2_score 
 from sklearn.metrics import mean_poisson_deviance, mean_gamma_deviance, accuracy_score
 from sklearn.preprocessing import MinMaxScaler
@@ -17,8 +18,7 @@ from plotly.subplots import make_subplots
 
 
 
-import warnings
-warnings.filterwarnings("ignore")
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
 # Importing dataset
@@ -36,8 +36,10 @@ df=reliance.set_index('Date')
 st.title('EDA')
 st.write(reliance)
 
-st.title('Visualizations')
+
 # ---------------------------------------------------------------------------
+st.title('Visualizations')
+
 st.header("Graphs")
 plt.figure(figsize=(20,10))
 #Plot 1
@@ -69,6 +71,7 @@ st.pyplot()
 # ---------------------------------------------------------------------------
 # Creating box-plots
 st.header("Box Plots")
+
 plt.figure(figsize=(20,10))
 #Plot 1
 plt.subplot(2,2,1)
@@ -181,5 +184,94 @@ plt.xlabel('Date')
 plt.ylabel('Price')
 st.pyplot()
 
+# ---------------------------------------------------------------------------
+
+close_df= reliance.copy()
 
 
+drope_column=close_df.drop(["Open",'High','Low','Volume'],axis=1).reset_index(drop=True)
+new_column=drope_column.dropna().reset_index(drop=True)
+
+close_stock = new_column.copy()
+
+st.write(close_stock)
+del close_df['Date']
+scaler=MinMaxScaler(feature_range=(0,1))
+closedf=scaler.fit_transform(np.array(close_df).reshape(-1,1))
+
+training_size=int(len(closedf)*0.86)
+test_size=len(closedf)-training_size
+train_data,test_data=closedf[0:training_size,:],closedf[training_size:len(closedf),:1]
+
+def create_dataset(dataset, time_step=1):
+    dataX, dataY = [], []
+    for i in range(len(dataset)-time_step-1):
+        a = dataset[i:(i+time_step), 0]   ###i=0, 0,1,2,3-----99   100 
+        dataX.append(a)
+        dataY.append(dataset[i + time_step, 0])
+    return np.array(dataX), np.array(dataY)
+
+time_step = 13
+X_train, y_train = create_dataset(train_data, time_step)
+X_test, y_test = create_dataset(test_data, time_step)
+
+
+X_train =X_train.reshape(X_train.shape[0],X_train.shape[1] , 1)
+X_test = X_test.reshape(X_test.shape[0],X_test.shape[1] , 1)
+
+
+tf.keras.backend.clear_session()
+model=Sequential()
+model.add(LSTM(32,return_sequences=True,input_shape=(time_step,1)))
+model.add(LSTM(32,return_sequences=True))
+model.add(LSTM(32))
+model.add(Dense(1))
+model.compile(loss='mean_squared_error',optimizer='adam')
+
+model.fit(X_train,y_train,validation_data=(X_test,y_test),epochs=200,batch_size=5,verbose=1)
+
+### Lets Do the prediction and check performance metrics
+train_predict=model.predict(X_train)
+test_predict=model.predict(X_test)
+
+
+# Transform back to original form
+
+train_predict = scaler.inverse_transform(train_predict)
+test_predict = scaler.inverse_transform(test_predict)
+original_ytrain = scaler.inverse_transform(y_train.reshape(-1,1)) 
+original_ytest = scaler.inverse_transform(y_test.reshape(-1,1)) 
+
+
+# shift train predictions for plotting
+
+look_back=time_step
+trainPredictPlot = np.empty_like(closedf)
+trainPredictPlot[:, :] = np.nan
+trainPredictPlot[look_back:len(train_predict)+look_back, :] = train_predict
+print("Train predicted data: ", trainPredictPlot.shape)
+
+# shift test predictions for plotting
+testPredictPlot = np.empty_like(closedf)
+testPredictPlot[:, :] = np.nan
+testPredictPlot[len(train_predict)+(look_back*2)+1:len(closedf)-1, :] = test_predict
+print("Test predicted data: ", testPredictPlot.shape)
+
+names = cycle(['Original close price','Train predicted close price','Test predicted close price'])
+
+
+plotdf = pd.DataFrame({'Date': close_stock['Date'],
+                       'original_close': close_stock['Close'],
+                      'train_predicted_close': trainPredictPlot.reshape(1,-1)[0].tolist(),
+                      'test_predicted_close': testPredictPlot.reshape(1,-1)[0].tolist()})
+
+fig = px.line(plotdf,x=plotdf['Date'], y=[plotdf['original_close'],plotdf['train_predicted_close'],
+                                          plotdf['test_predicted_close']],
+              labels={'value':'Stock price','Date': 'Date'})
+fig.update_layout(title_text='Comparision between original close price vs predicted close price',
+                  plot_bgcolor='white', font_size=15, font_color='black', legend_title_text='Close Price')
+fig.for_each_trace(lambda t:  t.update(name = next(names)))
+
+fig.update_xaxes(showgrid=False)
+fig.update_yaxes(showgrid=False)
+st.pyplot()
