@@ -1,20 +1,21 @@
-import streamlit as st
 import time
+import math
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import datetime as dt
+import yfinance as yf
+import streamlit as st
+import  plotly.express as px
+import matplotlib.pyplot as plt
 from tqdm.notebook import tqdm
 from tensorflow import keras
-import datetime as dt
 from datetime import date
-import yfinance as yf
-import pandas as pd
 from plotly import graph_objs as go
-import  plotly.express as px
-import math
-import seaborn as sns
-import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
 from keras.layers import Dense, LSTM
-import matplotlib.pyplot as plt
+
 
 
 START = "2015-01-01"
@@ -182,58 +183,7 @@ def create_train_test_data(df1):
 
     train_data = new_data[:train_data_len]
     test_data = new_data[train_data_len:]
-
     return train_data, test_data
-
-
-#Finding Movinf Average ---------------------------------------
-
-def find_moving_avg(ma_button, df):
-    days = ma_button
-
-    data1 = df.sort_index(ascending=True, axis=0)
-    new_data = pd.DataFrame(index=range(0, len(df)), columns=['Date', 'Close'])
-
-    for i in range(0, len(data1)):
-        new_data['Date'][i] = data1['Date'][i]
-        new_data['Close'][i] = data1['Close'][i]
-
-    new_data['SMA_'+str(days)] = new_data['Close'].rolling(min_periods=1, window=days).mean()
-
-    #new_data.dropna(inplace=True)
-    new_data.isna().sum()
-
-    #st.write(new_data)
-
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=new_data['Date'], y=new_data['Close'], mode='lines', name='Close'))
-    fig.add_trace(go.Scatter(x=new_data['Date'], y=new_data['SMA_'+str(days)], mode='lines', name='SMA_'+str(days)))
-    fig.update_layout(legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01), height=550, width=800,
-                      autosize=False, margin=dict(l=25, r=75, b=100, t=0))
-
-    st.plotly_chart(fig)
-
-
-#Finding Linear Regression ----------------------------
-
-def Linear_Regression_model(train_data, test_data):
-
-    x_train = train_data.drop(columns=['Date', 'Close'], axis=1)
-    x_test = test_data.drop(columns=['Date', 'Close'], axis=1)
-    y_train = train_data['Close']
-    y_test = test_data['Close']
-
-    #First Create the LinearRegression object and then fit it into the model
-    from sklearn.linear_model import LinearRegression
-
-    model = LinearRegression()
-    model.fit(x_train, y_train)
-
-    #Making the Predictions
-    prediction = model.predict(x_test)
-
-    return prediction
-
 
 #Plotting the Predictions -------------------------
 
@@ -291,7 +241,8 @@ if choices == 'EDA':
     st.write(reliance)
 
 
-    # ---------------------------------------------------------------------------
+# ---------------------------Graphs--------------------------------------
+
     st.set_option('deprecation.showPyplotGlobalUse', False)
     st.title('Visualizations')
 
@@ -323,7 +274,8 @@ if choices == 'EDA':
     plt.title('Low')
     st.pyplot()
 
-    # ---------------------------------------------------------------------------
+# ------------------------box-plots---------------------------------
+
     # Creating box-plots
     st.header("Box Plots")
 
@@ -354,7 +306,8 @@ if choices == 'EDA':
     plt.title('Low')
     st.pyplot()
 
-    # ---------------------------------------------------------------------------
+# ----------------------Histogram---------------------------------------
+
     st.header("Histogram")
     # Ploting Histogram
     plt.figure(figsize=(20,10))
@@ -385,7 +338,8 @@ if choices == 'EDA':
     st.pyplot()
 
 
-    # ---------------------------------------------------------------------------
+# -------------------------KDE Plots-----------------------------------------
+
     st.header("KDE Plots")
     # KDE-Plots
     plt.figure(figsize=(20,10))
@@ -412,7 +366,8 @@ if choices == 'EDA':
     st.line_chart(reliance['Volume'])
 
 
-    # -------------------------------------------------------------------------
+# -------------------Finding long-term and short-term trends---------------------
+
     st.title('Finding long-term and short-term trends')
     reliance_ma=reliance.copy()
     reliance_ma['30-day MA']=reliance['Close'].rolling(window=30).mean()
@@ -439,7 +394,7 @@ if choices == 'EDA':
     plt.xlabel('Date')
     plt.ylabel('Price')
     st.pyplot()
-# ---------------------------------------------------------------------------
+# -----------------------------Train Model----------------------------------
 
 elif choices == 'Train Model':
     st.subheader("Train Machine Learning Models for Stock Prediction")
@@ -466,3 +421,7 @@ elif choices == 'Train Model':
             st.write('**Your _final_ _dataframe_ _for_ Training**')
             st.write(df1[['Date','Close']])
             create_train_test_LSTM(df1, epoch, b_s, stock_select)
+# -------------------------------------------------------------------------------------------
+
+
+            
