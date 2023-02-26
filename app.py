@@ -278,7 +278,8 @@ if choices == 'EDA':
 
 
     # Importing dataset
-    reliance_0=pd.read_csv("data/RELIANCE.csv")
+    reliance_0 = yf.download('RELIANCE.NS', start='2016-01-01')
+    reliance_0.reset_index(inplace = True)
     st.title('Reliance Stock Market Prediction')
     st.header("Data We collected from the source")
     st.write(reliance_0)
@@ -288,7 +289,7 @@ if choices == 'EDA':
 
     reliance=reliance_2.copy()
     reliance['Date']=pd.to_datetime(reliance['Date'],format='%Y-%m-%d')
-    df=reliance.set_index('Date')
+    reliance=reliance.set_index('Date')
     st.title('EDA')
     st.write(reliance)
 
