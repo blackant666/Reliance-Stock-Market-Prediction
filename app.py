@@ -421,6 +421,7 @@ elif choices == 'Train Model':
             st.write('**Your _final_ _dataframe_ _for_ Training**')
             st.write(df1[['Date','Close']])
             create_train_test_LSTM(df1, epoch, b_s, stock_select)
+
 # -------------------------------------------------------------------------------------------
 
 
