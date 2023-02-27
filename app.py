@@ -362,7 +362,7 @@ if choices == 'EDA':
     st.pyplot()
 
 
-    st.header('Number of Days vs Volume')
+    st.header('Years vs Volume')
     st.line_chart(reliance['Volume'])
 
 
