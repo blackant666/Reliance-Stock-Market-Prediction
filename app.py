@@ -6,7 +6,7 @@ import seaborn as sns
 import datetime as dt
 import yfinance as yf
 import streamlit as st
-import  plotly.express as px
+import plotly.express as px
 import matplotlib.pyplot as plt
 from tqdm.notebook import tqdm
 from tensorflow import keras
