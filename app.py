@@ -225,7 +225,7 @@ choices = st.sidebar.selectbox("Select the Activity", menu,index=0)
 if choices == 'EDA':
     
     # Importing dataset
-    reliance_0 = yf.download('RELIANCE.NS', start='2016-01-01')
+    reliance_0 = yf.download('RELIANCE.NS', start='2015-01-01')
     reliance_0.reset_index(inplace = True)
     st.title('Reliance Stock Market Prediction')
     st.header("Data We collected from the source")
