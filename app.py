@@ -422,6 +422,3 @@ elif choices == 'Train Model':
             create_train_test_LSTM(df1, epoch, b_s, stock_select)
 
 # -------------------------------------------------------------------------------------------
-
-
-            
