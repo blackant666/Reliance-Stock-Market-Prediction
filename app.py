@@ -21,8 +21,6 @@ from keras.layers import Dense, LSTM
 START = "2015-01-01"
 TODAY = dt.datetime.now().strftime("%Y-%m-%d")
 
-st.title("Stock Prediction App")
-
 stocks = ["RELIANCE.NS"]
 
 
@@ -115,7 +113,7 @@ def create_train_test_LSTM(df, epoch, b_s, ticker_name):
 
     x_test_data = []
     y_test_data = dataset[training_data_len:, :]
-
+    
     for j in range(60, len(test_data)):
         x_test_data.append(test_data[j - 60:j, 0])
 
@@ -146,9 +144,10 @@ def create_train_test_LSTM(df, epoch, b_s, ticker_name):
     valid = df_filtered[training_data_len:]
     valid['Predictions'] = predictions
 
-    new_valid = valid.reset_index()
-    new_valid.drop('index', inplace=True, axis=1)
-    st.dataframe(new_valid)
+    new_valid = valid[603-30::]
+    n_valid = new_valid.reset_index()
+    n_valid.drop('index', inplace=True, axis=1)
+    st.dataframe(n_valid)
     st.markdown('')
     st.write("Plotting Actual vs Predicted ")
 
@@ -198,7 +197,7 @@ def prediction_plot(pred_data, test_data, models, ticker_name):
     st.success("Your Model is Trained Succesfully!")
     st.markdown('')
     st.write("Predicted Price vs Actual Close Price Results for - " ,models)
-    st.write("Stock Prediction on Test Data for - ", ticker_name)
+    st.write("Stock Prediction for next 30 days - ", ticker_name)
     st.write(test_data[['Date', 'Close', 'Predicted']])
     st.write("Plotting Close Price vs Predicted Price for - ", models)
 
