@@ -135,7 +135,7 @@ def create_train_test_LSTM(df, epoch, b_s, ticker_name):
     st.success("Your Model is Trained Succesfully!")
     st.markdown('')
     st.write("Predicted vs Actual Results for LSTM")
-    st.write("Stock Prediction on Test Data for - ",ticker_name)
+    st.write("Stock Prediction for 30 days - ",ticker_name)
 
     predictions = model.predict(x_test_data)
     predictions = scaler.inverse_transform(predictions)
