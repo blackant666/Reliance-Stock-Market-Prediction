@@ -144,8 +144,10 @@ def create_train_test_LSTM(df, epoch, b_s, ticker_name):
     valid = df_filtered[training_data_len:]
     valid['Predictions'] = predictions
 
-    new_valid = valid[603-30::]
-    n_valid = new_valid.reset_index()
+    new_valid = valid[::-1]
+    rev_valid = new_valid[:30]
+    rev_valid_30 = rev_valid[::-1]
+    n_valid = rev_valid_30.reset_index()
     n_valid.drop('index', inplace=True, axis=1)
     st.dataframe(n_valid)
     st.markdown('')
